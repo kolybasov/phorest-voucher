@@ -1,0 +1,29 @@
+<form onsubmit={{perform searchTask}}>
+  <p>
+    <label for="search-input">Enter clients phone or email:</label>
+    <input
+      type="text"
+      id="search-input"
+      value={{query}}
+      oninput={{action (mut query) value="target.value"}}>
+  </p>
+  <p>
+    <button type="submit" disabled={{searchTask.isRunning}}>
+      Search
+    </button>
+  </p>
+</form>
+
+<div>
+  <ul>
+    {{#each clients as |client|}}
+      <li>
+        {{client-card
+          client=client
+          on-create-voucher=on-create-voucher}}
+      </li>
+    {{else}}
+      <h2>No clients found for: {{query}}</h2>
+    {{/each}}
+  </ul>
+</div>

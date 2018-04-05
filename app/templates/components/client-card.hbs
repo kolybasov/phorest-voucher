@@ -1,0 +1,13 @@
+<div>
+  <div>{{client.firstName}} {{client.lastName}}</div>
+  <div>
+    <button onclick={{action (mut showVoucherForm) true}}>
+      Create voucher
+    </button>
+  </div>
+  {{#if showVoucherForm}}
+    {{voucher-form
+      client=client
+      on-create=on-create-voucher}}
+  {{/if}}
+</div>

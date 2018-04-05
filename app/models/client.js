@@ -1,25 +1,25 @@
 import Model from 'ember-data/model';
-// import attr from 'ember-data/attr';
+import attr from 'ember-data/attr';
+import { fragment } from 'ember-data-model-fragments/attributes';
 
 export default Model.extend({
-  // archived (boolean, optional),
-  // birthDate (string, optional),
-  // clientId (string, optional, read only),
-  // clientSince (string, optional),
-  // creatingBranchId (string, optional),
-  // creditAccount (CreditAccount, optional, read only),
-  // email (string, optional),
-  // emailMarketingConsent (boolean, optional),
-  // firstName (string),
-  // gender (string, optional) = ['MALE', 'FEMALE']stringEnum:"MALE", "FEMALE",
-  // landLine (string, optional),
-  // lastName (string),
-  // links (Array[Link], optional),
-  // mobile (string, optional),
-  // notes (string, optional),
-  // photoUrl (string, optional, read only),
-  // preferredStaffId (string, optional),
-  // smsMarketingConsent (boolean, optional),
-  // version (integer, optional)
-  // address (AddressData, optional),
+  firstName: attr('string'),
+  lastName: attr('string'),
+  email: attr('string'),
+  photoUrl: attr('string'),
+  gender: attr('string'),
+  mobile: attr('string'),
+  landLine: attr('string'),
+  notes: attr('string'),
+  birthDate: attr('string'),
+  clientSince: attr('date'),
+  emailMarketingConsent: attr('boolean'),
+  creatingBranchId: attr('string'),
+  preferredStaffId: attr('string'),
+  smsMarketingConsent: attr('boolean'),
+  archived: attr('boolean'),
+  version: attr('number'),
+
+  creditAccount: fragment('credit-account'),
+  address: fragment('address')
 });

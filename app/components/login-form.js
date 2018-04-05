@@ -11,12 +11,16 @@ export default Component.extend({
   username: '',
   password: '',
 
-  login: task(function *() {
+  'on-login'() {},
+
+  loginTask: task(function *(event) {
+    event.preventDefault();
+
     let onLogin = get(this, 'on-login');
     let credentials = getProperties(this, ['username', 'password']);
 
     yield onLogin(credentials);
 
     return false;
-  })
+  }).drop()
 });

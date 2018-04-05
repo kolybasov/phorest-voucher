@@ -1,0 +1,37 @@
+<form onsubmit={{perform createVoucherTask}}>
+  <p>
+    <label for="original-balance-input">Original Balance</label>
+    <input
+      type="text"
+      id="original-balance-input"
+      value={{voucher.originalBalance}}
+      oninput={{action (mut voucher.originalBalance) value="target.value"}}>
+  </p>
+  <p>
+    <label for="serial-number-input">Serial Number</label>
+    <input
+      type="text"
+      id="serial-number-input"
+      value={{voucher.serialNumber}}
+      oninput={{action (mut voucher.serialNumber) value="target.value"}}>
+  </p>
+  <p>
+    <label for="expiry-date-input">Expiry Date</label>
+    <input
+      type="text"
+      id="expiry-date-input"
+      value={{voucher.expiryDate}}
+      oninput={{action (mut voucher.expiryDate) value="target.value"}}>
+  </p>
+  <p>
+    <label for="issue-date-input">Issue Date</label>
+    <input
+      type="text"
+      id="issue-date-input"
+      value={{voucher.issueDate}}
+      oninput={{action (mut voucher.issueDate) value="target.value"}}>
+  </p>
+  <p>
+    <button type="submit">Create Voucher</button>
+  </p>
+</form>

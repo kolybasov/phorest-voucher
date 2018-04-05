@@ -20,6 +20,15 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    apiHost: 'https://api-gateway-dev.phorest.com/third-party-api-server/api/business',
+    apiBusinessId: 'eTC3QY5W3p_HmGHezKfxJw',
+    apiBranchId: 'SE-J0emUgQnya14mOGdQSw',
+
+    'ember-devtools': {
+      global: 'devTools',
+      enabled: environment === 'development'
     }
   };
 

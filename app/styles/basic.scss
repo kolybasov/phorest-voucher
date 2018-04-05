@@ -1,0 +1,15 @@
+.header {
+  height: 50px;
+  width: 100%;
+  background-color: $main-color;
+  display: flex;
+  justify-content: space-between;
+
+  .logo {
+    height: 100%;
+
+    img {
+      height: 100%;
+    }
+  }
+}
