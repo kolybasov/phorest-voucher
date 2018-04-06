@@ -6,12 +6,19 @@ import hbs from 'htmlbars-inline-precompile';
 module('Integration | Helper | cut', function(hooks) {
   setupRenderingTest(hooks);
 
-  // Replace this with your real tests.
-  test('it renders', async function(assert) {
-    this.set('inputValue', '1234');
+  test('it do not cut string if not needed', async function(assert) {
+    this.set('str', 'Short string');
 
-    await render(hbs`{{cut inputValue}}`);
+    await render(hbs`{{cut str}}`);
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    assert.equal(this.element.textContent.trim(), 'Short string');
+  });
+
+  test('it cuts string and appends ellipsis', async function(assert) {
+    this.set('str', 'Very long string');
+
+    await render(hbs`{{cut str 9}}`);
+
+    assert.equal(this.element.textContent.trim(), 'Very long…');
   });
 });

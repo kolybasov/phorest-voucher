@@ -6,12 +6,11 @@ import hbs from 'htmlbars-inline-precompile';
 module('Integration | Helper | capitalize', function(hooks) {
   setupRenderingTest(hooks);
 
-  // Replace this with your real tests.
-  test('it renders', async function(assert) {
-    this.set('inputValue', '1234');
+  test('it uppercase first letter', async function(assert) {
+    this.set('inputValue', 'username');
 
     await render(hbs`{{capitalize inputValue}}`);
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    assert.equal(this.element.textContent.trim(), 'Username');
   });
 });

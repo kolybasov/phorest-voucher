@@ -53,6 +53,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.rootURL = '/phorest-voucher/';
     // here you can enable a production-specific feature
   }
 

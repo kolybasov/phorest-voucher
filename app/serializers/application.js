@@ -49,11 +49,6 @@ export default JSONSerializer.extend({
     return this._super(...arguments);
   },
 
-  // normalizeCreateRecordResponse(store, primaryModelClass, payload, id, requestType) {
-  //   console.log(store, primaryModelClass, payload, id, requestType);
-  //   return this._super(...arguments);
-  // },
-
   // When there are no results Phorest API returns nothing
   // inside of _embedded. So we need to create some value
   // for multiple and single records response

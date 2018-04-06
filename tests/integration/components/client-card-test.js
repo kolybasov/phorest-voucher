@@ -1,26 +1,23 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | client-card', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it allows to create voucher', async function(assert) {
+    this.set('client', { id: 1, fullName: 'Mykola Basov' });
 
-    await render(hbs`{{client-card}}`);
-
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
     await render(hbs`
-      {{#client-card}}
-        template block text
-      {{/client-card}}
+      {{client-card
+        client=client}}
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.ok(/Mykola Basov/.test(this.element.textContent.trim()));
+
+    await click('.pv-button');
+
+    assert.ok(/Create voucher for/.test(this.element.textContent.trim()));
   });
 });

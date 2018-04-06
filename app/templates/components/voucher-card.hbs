@@ -1,7 +1,8 @@
 <div class="voucher-card">
   <h2 class="voucher-card__heading">
     Voucher Card<br>
-    Issued for {{cut voucher.client.fullName 30}}
+    Issued for: {{cut voucher.client.fullName 30}}<br>
+    Number: {{voucher.serialNumber}}
 
     <small>
       <span>Expires at: {{voucher.expiryDate}}</span>

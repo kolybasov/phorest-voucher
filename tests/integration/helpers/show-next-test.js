@@ -6,12 +6,21 @@ import hbs from 'htmlbars-inline-precompile';
 module('Integration | Helper | show-next', function(hooks) {
   setupRenderingTest(hooks);
 
-  // Replace this with your real tests.
-  test('it renders', async function(assert) {
-    this.set('inputValue', '1234');
+  test('it shows next', async function(assert) {
+    this.set('page', 2);
+    this.set('total', 9);
 
-    await render(hbs`{{show-next inputValue}}`);
+    await render(hbs`{{show-next page total}}`);
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    assert.equal(this.element.textContent.trim(), 'true');
+  });
+
+  test('it doesn\'t show next', async function(assert) {
+    this.set('page', 8);
+    this.set('total', 9);
+
+    await render(hbs`{{show-next page total}}`);
+
+    assert.equal(this.element.textContent.trim(), 'false');
   });
 });
