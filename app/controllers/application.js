@@ -9,6 +9,11 @@ export default Controller.extend({
     authenticate(credentials) {
       let session = get(this, 'session');
       session.authenticate(credentials);
+    },
+
+    signOut() {
+      let session = get(this, 'session');
+      session.invalidate();
     }
   }
 });

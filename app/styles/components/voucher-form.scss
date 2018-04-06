@@ -1,0 +1,35 @@
+.voucher-form {
+  &__heading, &__message {
+    color: $text-dimmed-color;
+    font-size: 20px;
+  }
+
+  &__heading {
+    color: $primary-button-color;
+  }
+
+  &__group {
+    display: flex;
+    flex-wrap: wrap;
+
+  }
+
+  &__control {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 1%;
+
+    label {
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+
+      &[readonly] {
+        cursor: pointer;
+      }
+    }
+  }
+}

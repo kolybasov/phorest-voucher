@@ -1,13 +1,45 @@
-<div>
-  <div>{{client.firstName}} {{client.lastName}}</div>
-  <div>
-    <button onclick={{action (mut showVoucherForm) true}}>
-      Create voucher
-    </button>
+<div class="client-card">
+  <div class="client-card__user">
+    <div class="client-card__photo">
+      {{#if client.photoUrl}}
+        <img src={{client.photoUrl}} alt={{client.email}}>
+      {{else}}
+        {{svg-jar "user"}}
+      {{/if}}
+    </div>
+    <div class="client-card__info">
+      <p>
+        {{svg-jar "chevron-right"}}
+        <span>{{cut client.fullName}}</span>
+      </p>
+      {{#if client.mobile}}
+        <p>
+          {{svg-jar "phone"}}
+          <span>{{client.mobile}}</span>
+        </p>
+      {{/if}}
+      {{#if client.email}}
+        <p>
+          {{svg-jar "mail"}}
+          <span>{{client.email}}</span>
+        </p>
+      {{/if}}
+      {{#if (not showVoucherForm)}}
+        <p>
+          <button
+            class="pv-button pv-button--inverted"
+            onclick={{action (mut showVoucherForm) true}}>
+            Create voucher
+          </button>
+        </p>
+      {{/if}}
+    </div>
   </div>
+
   {{#if showVoucherForm}}
     {{voucher-form
       client=client
-      on-create=on-create-voucher}}
+      on-create=on-create-voucher
+      on-cancel=(action (mut showVoucherForm) false)}}
   {{/if}}
 </div>

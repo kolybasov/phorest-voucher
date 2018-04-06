@@ -1,5 +1,5 @@
 import JSONSerializer from 'ember-data/serializers/rest';
-import { get, getWithDefault } from '@ember/object';
+import { get } from '@ember/object';
 import { pluralize } from 'ember-inflector';
 
 const MULTI_REQUESTS_TYPES = [
@@ -13,17 +13,18 @@ export default JSONSerializer.extend({
   // For createRecord request it adds root key
   normalizeResponse(store, modelClass, resourceHash, id, requestType) {
     if (resourceHash._embedded) {
-      resourceHash = getWithDefault(
-        resourceHash,
-        '_embedded',
-        this._emptyResourceFor(modelClass, requestType)
-      );
+      let meta = get(resourceHash, 'page');
+      resourceHash = get(resourceHash, '_embedded');
       resourceHash = Object.assign({}, resourceHash);
-      resourceHash.meta = resourceHash.page;
+      if (meta) {
+        resourceHash.meta = meta;
+      }
     } else if (requestType === 'createRecord') {
       resourceHash = {
         [get(modelClass, 'modelName')]: resourceHash
       };
+    } else {
+      resourceHash = this._emptyResourceFor(modelClass, requestType);
     }
     return this._super(store, modelClass, resourceHash, id, requestType);
   },

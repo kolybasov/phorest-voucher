@@ -1,29 +1,86 @@
-<form onsubmit={{perform searchTask}}>
-  <p>
-    <label for="search-input">Enter clients phone or email:</label>
-    <input
-      type="text"
-      id="search-input"
-      value={{query}}
-      oninput={{action (mut query) value="target.value"}}>
-  </p>
-  <p>
-    <button type="submit" disabled={{searchTask.isRunning}}>
-      Search
-    </button>
-  </p>
+<form onsubmit={{perform searchTask}} class="search-client-form">
+  <div class="search-client-form__dropdown">
+    {{#basic-dropdown
+      matchTriggerWidth=true
+      as |dd|}}
+      {{#dd.trigger class="search-client-form__dropdown-trigger"}}
+        {{svg-jar queryType.icon}}
+        <span>{{capitalize queryType.name}}</span>
+      {{/dd.trigger}}
+      {{#dd.content class="search-client-form__dropdown-content"}}
+        {{#each queryTypes as |qtype|}}
+          <a href="#" onclick={{action "changeQueryType" qtype dd.actions.close}}>
+            {{svg-jar qtype.icon}}
+            <span>{{capitalize qtype.name}}</span>
+          </a>
+        {{/each}}
+      {{/dd.content}}
+    {{/basic-dropdown}}
+  </div>
+
+  <input
+    type="text"
+    id="search-input"
+    class="search-client-form__input"
+    placeholder="Enter email or phone…"
+    value={{query}}
+    oninput={{action "updateQuery" value="target.value"}}>
+
+  <button
+    type="submit"
+    class="search-client-form__button"
+    disabled={{searchTask.isRunning}}>
+    {{svg-jar "search"}}
+    <span>Search</span>
+  </button>
 </form>
 
-<div>
-  <ul>
+<div class="search-client-results">
+  <h2 class="search-client-results__message">
+    {{#if searchTask.isRunning}}
+      Searching clients…
+    {{else if notFound}}
+      There are no clients with {{queryType.name}} "{{query}}" ¯\_(ツ)_/¯
+    {{else if searchError}}
+      Some error occured during search.<br>
+      You can try again or contact
+      <a href="mailto:kolybasov@gmail.com">me</a>.<br>
+      <small>{{searchError}}</small>
+    {{/if}}
+  </h2>
+
+  <ul class="search-client-results__list">
     {{#each clients as |client|}}
       <li>
         {{client-card
           client=client
           on-create-voucher=on-create-voucher}}
       </li>
-    {{else}}
-      <h2>No clients found for: {{query}}</h2>
     {{/each}}
   </ul>
+
+  {{#if (gt clients.meta.totalPages 0)}}
+    <div class="search-client-results__pagination">
+      {{#if (gt clients.meta.number 0)}}
+        <button
+          class="pv-button pv-button--inverted"
+          onclick={{action "updatePage" -1}}
+          disabled={{searchTask.isRunning}}>
+          Previous
+        </button>
+      {{else}}
+        <span></span>
+      {{/if}}
+      {{#if (show-next clients.meta.number clients.meta.totalPages)}}
+        <button
+          class="pv-button pv-button--inverted"
+          disabled={{searchTask.isRunnning}}
+          onclick={{action "updatePage" 1}}>
+          Next
+        </button>
+      {{else}}
+        <span></span>
+      {{/if}}
+    </div>
+  {{/if}}
 </div>

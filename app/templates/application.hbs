@@ -5,9 +5,19 @@
   {{#if session.isNotAuthenticated}}
     {{login-form
       on-login=(action "authenticate")}}
+  {{else}}
+    <div class="signout">
+      <button class="pv-button" onclick={{action "signOut"}}>
+        Sign Out
+      </button>
+    </div>
   {{/if}}
 </header>
 
-<main class="content">
+{{#if session.isNotAuthenticated}}
+  <h2 class="signin-warning">Please sign in to continue!</h2>
+{{/if}}
+
+<main class="content" disabled={{session.isNotAuthenticated}}>
   {{outlet}}
 </main>

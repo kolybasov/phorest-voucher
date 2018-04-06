@@ -23,6 +23,7 @@
     "ember-chrome-devtools": "^0.2.0",
     "ember-cli": "~3.0.2",
     "ember-cli-app-version": "^3.0.0",
+    "ember-cli-autoprefixer": "^0.8.1",
     "ember-cli-babel": "^6.6.0",
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-eslint": "^4.2.1",
@@ -48,9 +49,11 @@
     "ember-resolver": "^4.0.0",
     "ember-source": "~3.0.0",
     "ember-svg-jar": "^1.1.1",
+    "ember-truth-helpers": "^2.0.0",
     "eslint-plugin-ember": "^5.0.0",
     "loader.js": "^4.2.3",
-    "modern-normalize": "^0.4.0"
+    "modern-normalize": "^0.4.0",
+    "pikaday": "^1.7.0"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"

@@ -1,37 +1,72 @@
-<form onsubmit={{perform createVoucherTask}}>
-  <p>
-    <label for="original-balance-input">Original Balance</label>
-    <input
-      type="text"
-      id="original-balance-input"
-      value={{voucher.originalBalance}}
-      oninput={{action (mut voucher.originalBalance) value="target.value"}}>
-  </p>
-  <p>
-    <label for="serial-number-input">Serial Number</label>
-    <input
-      type="text"
-      id="serial-number-input"
-      value={{voucher.serialNumber}}
-      oninput={{action (mut voucher.serialNumber) value="target.value"}}>
-  </p>
-  <p>
-    <label for="expiry-date-input">Expiry Date</label>
-    <input
-      type="text"
-      id="expiry-date-input"
-      value={{voucher.expiryDate}}
-      oninput={{action (mut voucher.expiryDate) value="target.value"}}>
-  </p>
-  <p>
-    <label for="issue-date-input">Issue Date</label>
-    <input
-      type="text"
-      id="issue-date-input"
-      value={{voucher.issueDate}}
-      oninput={{action (mut voucher.issueDate) value="target.value"}}>
-  </p>
-  <p>
-    <button type="submit">Create Voucher</button>
-  </p>
-</form>
+{{#if voucher.isNew}}
+  <form class="voucher-form" onsubmit={{perform createVoucherTask}}>
+    <h2 class="voucher-form__heading">
+      Create voucher for {{cut client.fullName 30}}
+    </h2>
+    <div class="voucher-form__group">
+      <p class="voucher-form__control">
+        <label for="original-balance-input">Original Balance</label>
+        <input
+          type="number"
+          id="original-balance-input"
+          class="pv-input"
+          value={{voucher.originalBalance}}
+          oninput={{action (mut voucher.originalBalance) value="target.value"}}>
+      </p>
+      <p class="voucher-form__control">
+        <label for="serial-number-input">Serial Number(Optional)</label>
+        <input
+          type="text"
+          id="serial-number-input"
+          class="pv-input"
+          value={{voucher.serialNumber}}
+          oninput={{action (mut voucher.serialNumber) value="target.value"}}>
+      </p>
+    </div>
+    <div class="voucher-form__group">
+      <p class="voucher-form__control">
+        <label for="expiry-date-input">Expiry Date</label>
+        {{pikaday-input
+          id="expiry-date-input"
+          class="pv-input"
+          selected=voucher.expiryDate
+          on-select=(action (mut voucher.expiryDate))}}
+      </p>
+      <p class="voucher-form__control">
+        <label for="issue-date-input">Issue Date</label>
+        {{pikaday-input
+          id="issue-date-input"
+          class="pv-input"
+          selected=voucher.issueDate
+          on-select=(action (mut voucher.issueDate))}}
+      </p>
+    </div>
+    <p>
+      <button
+        type="button"
+        class="pv-button pv-button--inverted"
+        disabled={{createVoucherTask.isRunning}}
+        onclick={{action on-cancel}}>
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="pv-button pv-button--inverted"
+        disabled={{createVoucherTask.isRunning}}>
+        Create Voucher
+      </button>
+    </p>
+    <h2 class="voucher-form__message">
+      {{#if createError}}
+        Buy some reason I cannot create voucher.<br>
+        <small>{{createError}}</small>
+      {{else if createVoucherTask.isRunning}}
+        Creating voucher…
+      {{/if}}
+    </h2>
+  </form>
+{{else}}
+  {{voucher-card
+    voucher=voucher
+    on-hide=on-cancel}}
+{{/if}}

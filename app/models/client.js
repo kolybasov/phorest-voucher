@@ -1,6 +1,7 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { fragment } from 'ember-data-model-fragments/attributes';
+import { computed, get } from '@ember/object';
 
 export default Model.extend({
   firstName: attr('string'),
@@ -21,5 +22,13 @@ export default Model.extend({
   version: attr('number'),
 
   creditAccount: fragment('credit-account'),
-  address: fragment('address')
+  address: fragment('address'),
+
+  fullName: computed('firstName', 'lastName', {
+    get() {
+      let firstName = get(this, 'firstName');
+      let lastName = get(this, 'lastName');
+      return `${firstName} ${lastName}`;
+    }
+  })
 });

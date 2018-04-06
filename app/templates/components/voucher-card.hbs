@@ -1,0 +1,19 @@
+<div class="voucher-card">
+  <h2 class="voucher-card__heading">
+    Voucher Card<br>
+    Issued for {{cut voucher.client.fullName 30}}
+
+    <small>
+      <span>Expires at: {{voucher.expiryDate}}</span>
+    </small>
+
+    <button
+      class="pv-button"
+      onclick={{action on-hide}}>
+      Hide
+    </button>
+  </h2>
+  <div class="voucher-card__amount">
+    <span>${{voucher.originalBalance}}</span>
+  </div>
+</div>

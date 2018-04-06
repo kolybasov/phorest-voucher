@@ -1,23 +1,23 @@
-<form action="" onsubmit={{perform loginTask}}>
-  <p>
-    <label for="usename-input">Username</label>
-    <input
-      type="text"
-      id="username-input"
-      autocomplete="username"
-      value={{username}}
-      oninput={{action (mut username) value="target.value"}}>
-  </p>
-  <p>
-    <label for="password-input">Password</label>
-    <input
-      type="password"
-      id="password-input"
-      autocomplete="current-password"
-      value={{password}}
-      oninput={{action (mut password) value="target.value"}}>
-  </p>
-  <p>
-    <button type="submit">Login</button>
-  </p>
+<form action="" onsubmit={{perform loginTask}} class="login-form">
+  <input
+    type="text"
+    id="username-input"
+    class="login-form__input"
+    autocomplete="username"
+    placeholder="Username"
+    value={{username}}
+    oninput={{action (mut username) value="target.value"}}>
+
+  <input
+    type="password"
+    id="password-input"
+    class="login-form__input"
+    autocomplete="current-password"
+    placeholder="Password"
+    value={{password}}
+    oninput={{action (mut password) value="target.value"}}>
+
+  <button type="submit" class="login-form__button">
+    Sign In
+  </button>
 </form>

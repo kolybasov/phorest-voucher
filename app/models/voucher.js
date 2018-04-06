@@ -4,7 +4,7 @@ import { belongsTo } from 'ember-data/relationships';
 import config from 'phorest-voucher/config/environment';
 
 export default Model.extend({
-  originalBalance: attr('number'),
+  originalBalance: attr('number', { defaultValue: 10 }),
   serialNumber: attr('string'),
   expiryDate: attr('date', { defaultValue() { return new Date(); } }),
   issueDate: attr('date', { defaultValue() { return new Date(); } }),

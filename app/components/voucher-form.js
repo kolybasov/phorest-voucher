@@ -10,6 +10,7 @@ export default Component.extend({
 
   client: null,
   voucher: null,
+  createError: false,
 
   'on-create'() {},
 
@@ -34,15 +35,15 @@ export default Component.extend({
 
   createVoucherTask: task(function *(event) {
     event.preventDefault();
+    set(this, 'createError', false);
 
     let onCreate = get(this, 'on-create');
     let voucher = get(this, 'voucher');
 
     try {
       yield onCreate(voucher);
-      console.log('created voucher', voucher);
     } catch (err) {
-      console.warn('report error', err);
+      set(this, 'createError', err.message);
       throw err;
     }
   }).drop()
